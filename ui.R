@@ -1,29 +1,30 @@
-shinyUI(navbarPage("raptR",
+navbarPage("Traptir",
   tabPanel('Import',
-    column(4,offset = 4,
+    column(4, offset = 4,
       shinyjs::useShinyjs(),
       tags$head(
        tags$script(
          'Shiny.addCustomMessageHandler("myCallbackHandler", function(typeMessage) {if(typeMessage == 1){$("a:contains(Plot)").click();}});'
+       ),
+       tags$link(
+         rel = "stylesheet", type = "text/css", href="style.css"
        )
       ),
       source('./views/import/dataImportCtrlsUI.R', local = TRUE)$value,
       uiOutput('datasetCtrl')
     ),
     value = 'importTab'),
-  tabPanel(
-    "Table",
+  tabPanel("Table",
     column(2, offset = 1,
-      source('./views/table/manAggCtrlsUI.R', local = TRUE)$value,
-      uiOutput('dlBtnCSV')
+      source('./views/table/manAggCtrlsUI.R', local = TRUE)$value
     ),
     column(8,
+      uiOutput('dlBtnCSV'),
       DT::dataTableOutput("displayTable")
     ),
     value = 'tableTab'
   ),
-  tabPanel(
-    "Plot",
+  tabPanel("Plot",
     column(2, offset = 1,
       source('./views/plot/plotCtrlsUI.R', local = TRUE)$value,
       source('./views/modals/modalPanels.R',local = TRUE)$value
@@ -35,4 +36,4 @@ shinyUI(navbarPage("raptR",
     value = 'plotTab'
   ),
   id = "conditionedPanels"
-))
+)

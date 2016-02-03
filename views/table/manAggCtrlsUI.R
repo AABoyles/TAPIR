@@ -1,23 +1,12 @@
 verticalLayout(
   fluidRow(
-    column(6,
-           uiOutput('aggByCtrl')
-    ),
-    column(6,
-           uiOutput('aggTargetCtrl')
-    )
+    uiOutput('aggByCtrl'),
+    uiOutput('aggTargetCtrl'),
+    uiOutput('aggMethCtrl')
   ),
   fluidRow(
-    column(6, 
-           uiOutput('aggMethCtrl')
-    )
-  ),
-  fluidRow(
-    column(6,
-           uiOutput('shareOfCtrl')
-    ),
-    column(6,
-           uiOutput('shareTargetCtrl')
-    ) 
-  )        
+    uiOutput('shareOfCtrl'),
+    uiOutput('shareTargetCtrl')
+  )
 )
+

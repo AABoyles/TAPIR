@@ -8,7 +8,7 @@ observe({
   
   ## display data table reactively
   output$displayTable <- DT::renderDataTable({
-    DT::datatable(manAggDataset(), filter='bottom')
+    DT::datatable(manAggDataset(), filter='top',options = list(searching=FALSE))
   })
 })
 
