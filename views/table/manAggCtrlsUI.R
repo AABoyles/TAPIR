@@ -1,12 +1,12 @@
 verticalLayout(
-  fluidRow(
-    uiOutput('aggByCtrl'),
-    uiOutput('aggTargetCtrl'),
-    uiOutput('aggMethCtrl')
-  ),
-  fluidRow(
-    uiOutput('shareOfCtrl'),
-    uiOutput('shareTargetCtrl')
+  bsCollapse(
+    bsCollapsePanel("Aggregation",
+      uiOutput('aggByCtrl'),
+      uiOutput('aggTargetCtrl'),
+      uiOutput('aggMethCtrl'),
+      uiOutput('shareOfCtrl'),
+      uiOutput('shareTargetCtrl')
+    ),
+    bsCollapsePanel("Export", uiOutput('dlBtnCSV'))
   )
 )
-

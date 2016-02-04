@@ -19,7 +19,6 @@ navbarPage("Traptir",
       source('./views/table/manAggCtrlsUI.R', local = TRUE)$value
     ),
     column(8,
-      uiOutput('dlBtnCSV'),
       DT::dataTableOutput("displayTable")
     ),
     value = 'tableTab'
@@ -30,7 +29,6 @@ navbarPage("Traptir",
       source('./views/modals/modalPanels.R',local = TRUE)$value
     ),
     column(8,
-      uiOutput('exportPlotCtl'),
       plotOutput("plot", brush = brushOpts(id = "zoom_brush", resetOnNew = TRUE))
     ),
     value = 'plotTab'
