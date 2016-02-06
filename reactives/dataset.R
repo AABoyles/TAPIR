@@ -87,6 +87,11 @@ rawDataset <- reactive({
   }
 })
 
+## column filtered dataset
+colFiltDataset <- reactive({
+  rawDataset()[,as.numeric(input$varsToShowInTable)]
+})
+
 ## manually aggregated dataset
 manAggDataset <- reactive({
   
@@ -96,16 +101,17 @@ manAggDataset <- reactive({
   if (!is.null(input$aggBy) & !is.null(input$aggTarget) & !is.null(input$aggMeth)) {
     ## return manually aggregated dataset
     flog.debug("dataset::manAggDataset() - !is.null(input$aggBy) & !is.null(input$aggTarget) & !is.null(input$aggMeth)", name='all')
-    df <- aggregate(rawDataset(), input$aggBy, input$aggTarget, input$aggMeth)
+    df <- aggregate(colFiltDataset(), input$aggBy, input$aggTarget, input$aggMeth)
   }
   
   ## else, return raw dataset  
   else {
     flog.debug("dataset::manAggDataset() - !(!is.null(input$aggBy) & !is.null(input$aggTarget) & !is.null(input$aggMeth))", name='all')
-    df <- rawDataset()
+    df <- colFiltDataset()
   }
-
+  
   flog.debug("dataset::manAggDataset() - End", name='all')
+
   df
 })
 
@@ -114,20 +120,15 @@ dataset <- reactive({
   
   flog.debug("dataset::dataset() - Begin", name='all')
 
-  #if (is.null(input$rawVsManAgg)) return()
+  dataset <- NULL
+  
   if (is.null(input$rawVsManAgg)){
     flog.debug("dataset::dataset() - is.null(input$rawVsManAgg) - End", name='all')
-    return(rawDataset())
-  }
-
-  ## raw dataset
-  if (input$rawVsManAgg == 'raw') {
+    dataset <- colFiltDataset()
+  } else if (input$rawVsManAgg == 'raw') {
     flog.debug("dataset::dataset() - input$rawVsManAgg == 'raw' - End", name='all')
-    dataset <- rawDataset()
-  } 
-
-  ## aggregated dataset
-  else if (input$rawVsManAgg=='manAgg') {
+    dataset <- colFiltDataset()
+  } else if (input$rawVsManAgg=='manAgg') {
     flog.debug("dataset::dataset() - input$rawVsManAgg=='manAgg' - End", name='all')
     dataset <- manAggDataset()
   }

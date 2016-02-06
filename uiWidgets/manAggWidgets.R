@@ -1,6 +1,16 @@
+## Column Selection
+output$columnPicker <- renderUI({
+  vars <- origVars()
+  choices <- as.list(1:length(vars))
+  names(choices) <- vars
+  checkboxGroupInput("varsToShowInTable", "Displayed Variables",
+    choices = choices, selected = 1:length(vars))
+})
+
 ## aggregation-by options
 output$aggByCtrl <- renderUI({
-  aggByOpts <- origVars()
+  #aggByOpts <- origVars()
+  aggByOpts <- origVars()[as.numeric(input$varsToShowInTable)]
   selectInput('aggBy', 'Aggregate By', choices=aggByOpts, multiple=T)
 })
 

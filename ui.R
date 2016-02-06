@@ -16,7 +16,23 @@ navbarPage("Traptir",
     value = 'importTab'),
   tabPanel("Table",
     column(2, offset = 1,
-      source('./views/table/manAggCtrlsUI.R', local = TRUE)$value
+      verticalLayout(
+        bsCollapse(open = "Column Selection",
+          bsCollapsePanel("Column Selection",
+            uiOutput('columnPicker')
+          ),
+          bsCollapsePanel("Aggregation",
+            uiOutput('aggByCtrl'),
+            uiOutput('aggTargetCtrl'),
+            uiOutput('aggMethCtrl'),
+            uiOutput('shareOfCtrl'),
+            uiOutput('shareTargetCtrl')
+          ),
+          bsCollapsePanel("Export",
+            uiOutput('dlBtnCSV')
+          )
+        )
+      )
     ),
     column(8,
       DT::dataTableOutput("displayTable")
@@ -25,7 +41,101 @@ navbarPage("Traptir",
   ),
   tabPanel("Plot",
     column(2, offset = 1,
-      source('./views/plot/plotCtrlsUI.R', local = TRUE)$value,
+      #source('./views/plot/plotCtrlsUI.R', local = TRUE)$value,
+      verticalLayout(
+        bsCollapse(open = "Basics",
+          bsCollapsePanel("Basics",
+            selectInput(inputId = "plotType", label = "Plot Type", 
+              choices = c(
+                'Scatter'='scatter',
+                'Line'='line',
+                'Bar'='bar',
+                'Histogram'='histogram', 
+                'Density'='density',
+                'Box'='box',
+                'Path'='path',
+                'Violin'='violin' 
+                #'Image'='image', 
+                #'2-Density', 'density2d'
+              )
+            ),
+            fluidRow(
+              column(6, uiOutput('xCtrl')),
+              column(6, uiOutput('yCtrl'))
+            )
+          ),
+          bsCollapsePanel("Aesthetics",
+            uiOutput('showAesWgtsCtrl'),
+            verticalLayout(
+              fluidRow(
+                column(6,
+                       uiOutput('colCtrl')
+                ),
+                column(6,
+                       uiOutput('treatAsFacVarColCtrl')
+                )
+              ),
+              
+              fluidRow(
+                column(6,
+                       uiOutput('fillCtrl')           
+                ),
+                column(6,
+                       uiOutput('posCtrl')
+                )
+              ),
+              
+              uiOutput('ptsOverlayCondCtrl'),
+              
+              fluidRow(
+                column(6, 
+                       uiOutput('sizeCtrl')
+                ),
+                column(6,
+                       uiOutput('shapeCtrl')
+                )
+              ),
+              
+              fluidRow(
+                column(6,
+                       uiOutput('smthCtrl')
+                )
+              ),
+              
+              uiOutput('alphaCtrl'),
+              uiOutput('sizeMagCtrl'),
+              uiOutput('binWidthCtrl'),
+              
+              uiOutput('jitCtrl'),
+              uiOutput('coordFlipCtrl'),
+              uiOutput('densBlkLineCondCtrl')
+            )
+          ),
+          bsCollapsePanel("Faceting",
+            uiOutput('showFacetWgtsCtrl'),
+            source('./views/plot/facetCtrlsUI.R'           )$value
+          ),
+          bsCollapsePanel("Range",
+            uiOutput('showXYRangeWgtsCtrl'),
+            source('./views/plot/xyRangeCtrlsUI.R'         )$value
+          ),
+          bsCollapsePanel("Aggregation",
+            uiOutput('showDSTypeAndPlotAggWgtsCtrl'),
+            source('./views/plot/DSTypeAndPlotAggCtrlsUI.R')$value
+          ),
+          bsCollapsePanel("Theme",
+            uiOutput('showThemeWgtsCtrl'),
+            source('./views/plot/labelAndStyleCtrlsUI.R'   )$value
+          ),
+          bsCollapsePanel("Export",
+            uiOutput('exportPlotCtl')
+          )
+        )
+        
+        ## widgets to show/hide advanced control widgets
+        #uiOutput('showPlotAggWgtCtrl')
+        
+      ),
       source('./views/modals/modalPanels.R',local = TRUE)$value
     ),
     column(8,
