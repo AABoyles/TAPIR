@@ -1,6 +1,9 @@
 #dlBtnCSV{
-  text-align:right !important;
+  text-align:center !important;
 }
 #exportPlotCtl{
-  text-align:right !important;
+  text-align:center !important;
+}
+.shiny-output-error, .htmlwidgets-error{
+  display:none;
 }
