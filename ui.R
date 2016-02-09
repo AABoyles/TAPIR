@@ -41,7 +41,6 @@ navbarPage("Traptir",
   ),
   tabPanel("Plot",
     column(2, offset = 1,
-      #source('./views/plot/plotCtrlsUI.R', local = TRUE)$value,
       verticalLayout(
         bsCollapse(open = "Basics",
           bsCollapsePanel("Basics",
@@ -68,40 +67,26 @@ navbarPage("Traptir",
             uiOutput('showAesWgtsCtrl'),
             verticalLayout(
               fluidRow(
-                column(6,
-                       uiOutput('colCtrl')
-                ),
-                column(6,
-                       uiOutput('treatAsFacVarColCtrl')
-                )
+                column(6, uiOutput('colCtrl')),
+                column(6, uiOutput('treatAsFacVarColCtrl'))
               ),
               
               fluidRow(
-                column(6,
-                       uiOutput('fillCtrl')           
-                ),
-                column(6,
-                       uiOutput('posCtrl')
-                )
+                column(6, uiOutput('fillCtrl')),
+                column(6, uiOutput('posCtrl'))
               ),
               
               uiOutput('ptsOverlayCondCtrl'),
               
               fluidRow(
-                column(6, 
-                       uiOutput('sizeCtrl')
-                ),
-                column(6,
-                       uiOutput('shapeCtrl')
-                )
+                column(6, uiOutput('sizeCtrl')),
+                column(6, uiOutput('shapeCtrl'))
               ),
               
               fluidRow(
-                column(6,
-                       uiOutput('smthCtrl')
-                )
+                column(6, uiOutput('smthCtrl'))
               ),
-              
+
               uiOutput('alphaCtrl'),
               uiOutput('sizeMagCtrl'),
               uiOutput('binWidthCtrl'),
@@ -113,19 +98,58 @@ navbarPage("Traptir",
           ),
           bsCollapsePanel("Faceting",
             uiOutput('showFacetWgtsCtrl'),
-            source('./views/plot/facetCtrlsUI.R'           )$value
+            verticalLayout(
+              fluidRow(
+                column(6, uiOutput('facetRowCtrl')),
+                column(6, uiOutput('facetColCtrl'))
+              ),
+              
+              fluidRow(
+                column(6, uiOutput('facetWrapCtrl')),
+                column(6, uiOutput('facetScaleCtrl'))
+              )  
+            )
           ),
           bsCollapsePanel("Range",
             uiOutput('showXYRangeWgtsCtrl'),
-            source('./views/plot/xyRangeCtrlsUI.R'         )$value
+            verticalLayout(
+              uiOutput('xlimCtrl'),
+              uiOutput('ylimCtrl')
+            )
           ),
           bsCollapsePanel("Aggregation",
             uiOutput('showDSTypeAndPlotAggWgtsCtrl'),
-            source('./views/plot/DSTypeAndPlotAggCtrlsUI.R')$value
+            verticalLayout(
+              fluidRow(
+                column(6, uiOutput('rawVsManAggCtrl')),
+                column(6, uiOutput('plotAggMethCtrl'))
+              ),
+              
+              uiOutput('plotAddAggByCtrl')
+            )
           ),
           bsCollapsePanel("Theme",
             uiOutput('showThemeWgtsCtrl'),
-            source('./views/plot/labelAndStyleCtrlsUI.R'   )$value
+            verticalLayout(
+              uiOutput('plotTitleCtrl'),
+              fluidRow(
+                column(6, uiOutput('xLabelCtrl')),
+                column(6, uiOutput('yLabelCtrl'))
+              ),
+              fluidRow(
+                column(6, uiOutput('labelFontFamilyCtrl')),
+                column(6, uiOutput('labelFontFaceCtrl'))
+              ),
+              fluidRow(
+                column(6, uiOutput('labelFontSizeCtrl')),
+                column(6, uiOutput('labelFontColorCtrl'))
+              ), 
+              fluidRow(
+                column(6, uiOutput('hjustCtrl')), 
+                column(6, uiOutput('vjustCtrl'))
+              ),
+              uiOutput('plotThemeCtrl')
+            )
           ),
           bsCollapsePanel("Export",
             uiOutput('exportPlotCtl')
@@ -136,7 +160,12 @@ navbarPage("Traptir",
         #uiOutput('showPlotAggWgtCtrl')
         
       ),
-      source('./views/modals/modalPanels.R',local = TRUE)$value
+      shinyBS::bsModal("modalExportOptions", "Export Options", "exportPlotCtl", size = "small",
+                       uiOutput('fileHeightCtl'),
+                       uiOutput('fileWidthCtl'),
+                       uiOutput('fileDPICtl'),
+                       uiOutput('fileTypeCtl'),
+                       uiOutput('dlBtnPlot'))
     ),
     column(8,
       plotOutput("plot", brush = brushOpts(id = "zoom_brush", resetOnNew = TRUE))
