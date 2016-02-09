@@ -4,7 +4,6 @@ library(ggplot2)
 library(dplyr)
 library(DT)
 library(stringr)
-library(shinyBS)
 library(shinyjs)
 library(ggthemes)
 library(jsonlite)
@@ -24,7 +23,10 @@ source('./global_constants.R')
 ## file size options
 # by default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 10GB.
-options(shiny.maxRequestSize = 10000*1024^2)
+options(shiny.maxRequestSize = 10*1024^3)
+# Note that this does not override other settings that could limit upload sizes.
+# For example, if this is deployed behind an nginx server, the server cap must also
+# be raised in order to allow larger file uploads.
 
 shinyServer(function(input, output, session) {
   ## reactive variables
