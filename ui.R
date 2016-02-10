@@ -1,6 +1,11 @@
 navbarPage("Tapir",
+  tabPanel('About',
+    column(6, offset=3,
+      includeMarkdown("./README.md")
+    )
+  ),
   tabPanel('Import',
-    column(4, offset = 4,
+    column(4, offset = 3,
       shinyjs::useShinyjs(),
       tags$head(
        tags$script(
