@@ -1,4 +1,4 @@
-navbarPage("Traptir",
+navbarPage("Tapir",
   tabPanel('Import',
     column(4, offset = 4,
       shinyjs::useShinyjs(),
