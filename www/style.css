@@ -1,3 +1,11 @@
+.navbar.navbar-default.navbar-static-top{
+  border-bottom:none;
+}
+
+li.active > a{
+  background-color:#fff !important;
+}
+
 #dlBtnCSV{
   text-align:center !important;
 }
