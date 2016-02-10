@@ -15,7 +15,7 @@ navbarPage("Tapir",
     ),
     value = 'importTab'),
   tabPanel("Table",
-    column(2, offset = 1,
+    div(class = "col-sm-2 col-sm-offset-1 affix",
       verticalLayout(
         bsCollapse(open = "Column Selection",
           bsCollapsePanel("Column Selection",
@@ -34,7 +34,7 @@ navbarPage("Tapir",
         )
       )
     ),
-    column(8,
+    column(8, offset = 3,
       DT::dataTableOutput("displayTable")
     ),
     value = 'tableTab'
