@@ -56,10 +56,6 @@ output$dlBtnPlot <- renderUI({
 #               multiple=T)
 # })
 
-output$exportPlotCtl <- renderUI({
-  shinyBS::bsButton("exportPlot", label="Export Plot", type = "action", icon = icon("download"))
-})
-
 output$fileTypeCtl <- renderUI({
   selectInput(inputId = "fileType", label = "File Type", 
               choices = c('PDF'='.pdf',

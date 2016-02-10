@@ -124,8 +124,9 @@ navbarPage("Traptir",
                 column(6, uiOutput('rawVsManAggCtrl')),
                 column(6, uiOutput('plotAggMethCtrl'))
               ),
-              
               uiOutput('plotAddAggByCtrl')
+              ## widgets to show/hide advanced control widgets
+              #uiOutput('showPlotAggWgtCtrl')
             )
           ),
           bsCollapsePanel("Theme",
@@ -152,20 +153,14 @@ navbarPage("Traptir",
             )
           ),
           bsCollapsePanel("Export",
-            uiOutput('exportPlotCtl')
+            uiOutput('fileHeightCtl'),
+            uiOutput('fileWidthCtl'),
+            uiOutput('fileDPICtl'),
+            uiOutput('fileTypeCtl'),
+            uiOutput('dlBtnPlot')
           )
         )
-        
-        ## widgets to show/hide advanced control widgets
-        #uiOutput('showPlotAggWgtCtrl')
-        
-      ),
-      shinyBS::bsModal("modalExportOptions", "Export Options", "exportPlotCtl", size = "small",
-                       uiOutput('fileHeightCtl'),
-                       uiOutput('fileWidthCtl'),
-                       uiOutput('fileDPICtl'),
-                       uiOutput('fileTypeCtl'),
-                       uiOutput('dlBtnPlot'))
+      )
     ),
     column(8,
       plotOutput("plot", brush = brushOpts(id = "zoom_brush", resetOnNew = TRUE))
