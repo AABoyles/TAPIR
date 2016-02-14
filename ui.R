@@ -5,7 +5,23 @@ navbarPage("Tapir",
     )
   ),
   tabPanel('Import',
-    column(4, offset = 3,
+    div(class = "col-sm-2 col-sm-offset-1 affix",
+      verticalLayout(
+        bsCollapse(open = "Sample Data",
+          bsCollapsePanel("Sample Data",
+            p("Choose a Sample Dataset")
+          ),
+          bsCollapsePanel("Upload File",
+            column(6,p("Filechooser Here.")),
+            column(6,p("format Selector Here."))
+          ),
+          bsCollapsePanel("Advanced Import Settings",
+            p("For text formats, override header reading, set delimiter, quote format, etc.")
+          )
+        )
+      )
+    ),
+    column(6, offset=3,
       shinyjs::useShinyjs(),
       tags$head(
        tags$script(
@@ -40,7 +56,7 @@ navbarPage("Tapir",
       )
     ),
     column(8, offset = 3,
-      DT::dataTableOutput("displayTable")
+      dataTableOutput("displayTable")
     ),
     value = 'tableTab'
   ),
