@@ -1,4 +1,5 @@
 ## import libraries
+library(jsonlite)
 library(shiny)
 library(ggplot2)
 library(dplyr)
