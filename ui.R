@@ -7,9 +7,9 @@ navbarPage("Tapir",
   tabPanel('Import',
     div(class = "col-sm-2 col-sm-offset-1 affix",
       verticalLayout(
-        bsCollapse(open = "Sample Data",
-          bsCollapsePanel("Sample Data",
-            p("Choose a Sample Dataset")
+        bsCollapse(open = "Active Dataset",
+          bsCollapsePanel("Active Dataset",
+            p("Choose your Active Dataset")
           ),
           bsCollapsePanel("Upload File",
             column(6,p("Filechooser Here.")),
@@ -85,7 +85,7 @@ navbarPage("Tapir",
             )
           ),
           bsCollapsePanel("Aesthetics",
-            uiOutput('showAesWgtsCtrl'),
+            checkboxInput('showAesWgts', 'Show aesthetics', value=FALSE),
             verticalLayout(
               fluidRow(
                 column(6, uiOutput('colCtrl')),
@@ -118,7 +118,7 @@ navbarPage("Tapir",
             )
           ),
           bsCollapsePanel("Faceting",
-            uiOutput('showFacetWgtsCtrl'),
+            checkboxInput('showFacetWgts', 'Show facets', value=FALSE),
             verticalLayout(
               fluidRow(
                 column(6, uiOutput('facetRowCtrl')),
@@ -132,14 +132,14 @@ navbarPage("Tapir",
             )
           ),
           bsCollapsePanel("Range",
-            uiOutput('showXYRangeWgtsCtrl'),
+            checkboxInput('showXYRangeWgts', 'Show ranges', value=FALSE),
             verticalLayout(
               uiOutput('xlimCtrl'),
               uiOutput('ylimCtrl')
             )
           ),
           bsCollapsePanel("Aggregation",
-            uiOutput('showDSTypeAndPlotAggWgtsCtrl'),
+            checkboxInput('showPlotAggWgt', 'Show plot aggregations', value=FALSE),
             verticalLayout(
               fluidRow(
                 column(6, uiOutput('rawVsManAggCtrl')),
@@ -151,7 +151,7 @@ navbarPage("Tapir",
             )
           ),
           bsCollapsePanel("Theme",
-            uiOutput('showThemeWgtsCtrl'),
+            checkboxInput('showThemeWgts', 'Show themes', value=FALSE),
             verticalLayout(
               uiOutput('plotTitleCtrl'),
               fluidRow(
@@ -174,11 +174,22 @@ navbarPage("Tapir",
             )
           ),
           bsCollapsePanel("Export",
-            uiOutput('fileHeightCtl'),
-            uiOutput('fileWidthCtl'),
-            uiOutput('fileDPICtl'),
-            uiOutput('fileTypeCtl'),
-            uiOutput('dlBtnPlot')
+            numericInput(inputId = "fileHeight", label = "Height (inches)", 
+              value = gcnFileWidthDefault, min = 0, max = gcnFileHeightMax
+            ),
+            numericInput(inputId = "fileWidth", label = "Width (inches)", 
+              value = gcnFileHeightDefault, min = 0, max = gcnFileWidthMax
+            ),
+            numericInput(inputId = "fileDPI", label = "Dots Per Inch", 
+              value = gcnFileDPIDefault, min = 0, max = gcnFileDPIMax
+            ),
+            selectInput(inputId = "fileType", label = "File Type", 
+                        choices = c('PDF'='.pdf',
+                                    'PNG'='.png',
+                                    'JPG'='.jpg',
+                                    'SVG'='.svg')
+            ),
+            downloadButton('dlPlot', 'Download')
           )
         )
       )

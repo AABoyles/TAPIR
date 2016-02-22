@@ -146,8 +146,6 @@ output$ptsOverlayCondCtrl <- renderUI({
   }
 })
 
-
-
 ## row-wise facet options
 output$facetRowCtrl <- renderUI({
   if (is.null(input$showFacetWgts)) return()
@@ -355,33 +353,7 @@ output$plotThemeCtrl <- renderUI({
   }
 })
 
-
 #### show/hide checkbox widgets
-## show aesthetic controls
-output$showAesWgtsCtrl <- renderUI({
-  checkboxInput('showAesWgts', 'Show aesthetics', value=FALSE)
-})
-
-## show facet controls
-output$showFacetWgtsCtrl <- renderUI({
-  checkboxInput('showFacetWgts', 'Show facets', value=FALSE)
-})
-
-## show X & Y range controls
-output$showXYRangeWgtsCtrl <- renderUI({
-  checkboxInput('showXYRangeWgts', 'Show ranges', value=FALSE)
-})
-
-## show aggregation controls
-output$showPlotAggWgtCtrl <- renderUI({
-  checkboxInput('showPlotAggWgt', 'Show plot aggregations', value=FALSE)
-})
-
-## show theme controls
-output$showThemeWgtsCtrl <- renderUI({
-  checkboxInput('showThemeWgts', 'Show themes', value=FALSE)
-})
-
 ## show dataset type and plot aggregation method controls
 output$showDSTypeAndPlotAggWgtsCtrl <- renderUI({
   checkboxInput('showDSTypeAndPlotAggWgts', 
