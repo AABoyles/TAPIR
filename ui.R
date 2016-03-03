@@ -175,13 +175,13 @@ navbarPage("Tapir",
           ),
           bsCollapsePanel("Export",
             numericInput(inputId = "fileHeight", label = "Height (inches)", 
-              value = gcnFileWidthDefault, min = 0, max = gcnFileHeightMax
+              value = 8.5, min = 0, max = 850
             ),
             numericInput(inputId = "fileWidth", label = "Width (inches)", 
-              value = gcnFileHeightDefault, min = 0, max = gcnFileWidthMax
+              value = 11, min = 0, max = 1100
             ),
             numericInput(inputId = "fileDPI", label = "Dots Per Inch", 
-              value = gcnFileDPIDefault, min = 0, max = gcnFileDPIMax
+              value = 300, min = 1, max = 1200
             ),
             selectInput(inputId = "fileType", label = "File Type", 
                         choices = c('PDF'='.pdf',
